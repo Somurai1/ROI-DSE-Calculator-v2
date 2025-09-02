@@ -28,7 +28,7 @@ const InputField = ({
           value={value}
           onChange={(e) => onChange(fieldKey, e.target.value)}
           disabled={disabled}
-          className="input-field"
+          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white text-gray-900 placeholder-gray-500 disabled:bg-gray-100 disabled:cursor-not-allowed hover:border-gray-400"
         >
           {options.map(option => (
             <option key={option.value || option} value={option.value || option}>
@@ -46,7 +46,7 @@ const InputField = ({
           checked={value}
           onChange={(e) => onChange(fieldKey, e.target.checked)}
           disabled={disabled}
-          className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+          className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-2 border-gray-300 rounded focus:ring-2 focus:ring-blue-200 transition-all duration-200"
         />
       );
     }
@@ -62,15 +62,15 @@ const InputField = ({
         min={min}
         max={max}
         step={step}
-        className="input-field"
+        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white text-gray-900 placeholder-gray-500 disabled:bg-gray-100 disabled:cursor-not-allowed hover:border-gray-400"
       />
     );
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-semibold text-gray-800 mb-2">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
@@ -90,7 +90,7 @@ const InputField = ({
 
       {renderInput()}
 
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between pt-1">
         {showTooltip && tooltip && (
           <div className="flex items-start space-x-1 text-xs text-gray-500">
             <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
