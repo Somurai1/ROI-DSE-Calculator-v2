@@ -313,7 +313,7 @@ const PDFExport = ({ results, inputs, mode, onClose }) => {
           </Text>
           {mode === 'advanced' && inputs.use_assessor_costs && (
             <Text style={{ fontSize: 10, color: '#374151', lineHeight: 1.4, marginTop: 8 }}>
-              Professional DSE assessment costs of {currencySymbol}{results.assessor_cost_total.toLocaleString()} are included in this analysis.
+              Professional DSE assessment cost savings of {currencySymbol}{results.assessor_cost_saving.toLocaleString()} are included in this analysis.
             </Text>
           )}
         </View>
@@ -406,10 +406,10 @@ const PDFExport = ({ results, inputs, mode, onClose }) => {
               <Text style={styles.tableCell}>Presenteeism Reduction</Text>
               <Text style={styles.tableCell}>{currencySymbol}{results.presenteeism_saving.toLocaleString()}</Text>
             </View>
-            {results.assessor_cost_total > 0 && (
+            {results.assessor_cost_saving > 0 && (
               <View style={styles.tableRow}>
-                <Text style={styles.tableCell}>Assessor Costs</Text>
-                <Text style={styles.tableCell}>-{currencySymbol}{results.assessor_cost_total.toLocaleString()}</Text>
+                <Text style={styles.tableCell}>Assessor Cost Savings</Text>
+                <Text style={styles.tableCell}>{currencySymbol}{results.assessor_cost_saving.toLocaleString()}</Text>
               </View>
             )}
             <View style={styles.tableRow}>

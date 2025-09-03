@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CALCULATOR_CONFIG } from './config/calculatorConfig.js';
 import { ROICalculator } from './utils/calculations.js';
+import { getFieldErrors } from './utils/validation.js';
 import Header from './components/Header.jsx';
 import ModeToggle from './components/ModeToggle.jsx';
 import QuickMode from './components/QuickMode.jsx';
@@ -30,6 +31,7 @@ function App() {
 
   const [results, setResults] = useState(null);
   const [showPDF, setShowPDF] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   // Initialize with sector defaults
   useEffect(() => {
@@ -48,6 +50,14 @@ function App() {
     const calculator = new ROICalculator(inputs);
     const calculatedResults = calculator.calculate();
     setResults(calculatedResults);
+    
+    // Update field errors
+    if (!calculatedResults.isValid && calculatedResults.errors) {
+      const errors = getFieldErrors(calculatedResults.errors);
+      setFieldErrors(errors);
+    } else {
+      setFieldErrors({});
+    }
   }, [inputs]);
 
   // Handle input changes
@@ -116,6 +126,7 @@ function App() {
                 onSectorChange={handleSectorChange}
                 onReset={resetToSectorDefaults}
                 isSectorDefault={isSectorDefault}
+                fieldErrors={fieldErrors}
               />
             ) : (
               <AdvancedMode 
@@ -124,6 +135,7 @@ function App() {
                 onSectorChange={handleSectorChange}
                 onReset={resetToSectorDefaults}
                 isSectorDefault={isSectorDefault}
+                fieldErrors={fieldErrors}
               />
             )}
           </div>

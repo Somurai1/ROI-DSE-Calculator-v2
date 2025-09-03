@@ -2,7 +2,7 @@ import React from 'react';
 import { CALCULATOR_CONFIG } from '../config/calculatorConfig.js';
 import InputField from './InputField.jsx';
 
-const QuickMode = ({ inputs, onInputChange, onSectorChange, onReset, isSectorDefault }) => {
+const QuickMode = ({ inputs, onInputChange, onSectorChange, onReset, isSectorDefault, fieldErrors = {} }) => {
   const sectors = Object.keys(CALCULATOR_CONFIG.sector_defaults);
   const currencies = CALCULATOR_CONFIG.currencies;
 
@@ -30,6 +30,7 @@ const QuickMode = ({ inputs, onInputChange, onSectorChange, onReset, isSectorDef
           min={1}
           placeholder="e.g., 100"
           isDefault={false}
+          error={fieldErrors.users}
         />
 
         <InputField
@@ -50,6 +51,7 @@ const QuickMode = ({ inputs, onInputChange, onSectorChange, onReset, isSectorDef
           step={1000}
           placeholder="e.g., 50000"
           isDefault={isSectorDefault('salary_employee')}
+          error={fieldErrors.salary_employee}
         />
 
         <InputField
@@ -62,6 +64,7 @@ const QuickMode = ({ inputs, onInputChange, onSectorChange, onReset, isSectorDef
           step={1000}
           placeholder="e.g., 40000"
           isDefault={isSectorDefault('salary_admin')}
+          error={fieldErrors.salary_admin}
         />
 
         <InputField

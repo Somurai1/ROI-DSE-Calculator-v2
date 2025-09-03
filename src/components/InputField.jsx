@@ -16,7 +16,8 @@ const InputField = ({
   options = null,
   min = null,
   max = null,
-  step = null
+  step = null,
+  error = null
 }) => {
   const tooltip = TOOLTIPS[fieldKey];
   const source = SOURCES[fieldKey];
@@ -28,7 +29,9 @@ const InputField = ({
           value={value}
           onChange={(e) => onChange(fieldKey, e.target.value)}
           disabled={disabled}
-          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white text-gray-900 placeholder-gray-500 disabled:bg-gray-100 disabled:cursor-not-allowed hover:border-gray-400"
+          className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 transition-all duration-200 bg-white text-gray-900 placeholder-gray-500 disabled:bg-gray-100 disabled:cursor-not-allowed hover:border-gray-400 ${
+            error ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+          }`}
         >
           {options.map(option => (
             <option key={option.value || option} value={option.value || option}>
@@ -62,7 +65,9 @@ const InputField = ({
         min={min}
         max={max}
         step={step}
-        className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 bg-white text-gray-900 placeholder-gray-500 disabled:bg-gray-100 disabled:cursor-not-allowed hover:border-gray-400"
+        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 transition-all duration-200 bg-white text-gray-900 placeholder-gray-500 disabled:bg-gray-100 disabled:cursor-not-allowed hover:border-gray-400 ${
+          error ? 'border-red-500 focus:border-red-500 focus:ring-red-200' : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200'
+        }`}
       />
     );
   };
@@ -89,6 +94,13 @@ const InputField = ({
       </div>
 
       {renderInput()}
+
+      {/* Error message */}
+      {error && (
+        <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-2">
+          {error}
+        </div>
+      )}
 
       <div className="flex items-start justify-between pt-1">
         {showTooltip && tooltip && (

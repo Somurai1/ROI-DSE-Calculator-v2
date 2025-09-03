@@ -4,6 +4,7 @@ export const CALCULATOR_CONFIG = {
     manual_minutes_per_user: 20,
     software_minutes_per_user: 8,
     absence_reduction_pct: 0.25,
+    assessment_reduction_pct: 0.30,
     presenteeism_hours: 1.0,
     working_weeks: 48,
     working_days: 220,
@@ -142,12 +143,12 @@ export const TOOLTIPS = {
   absence_days: "Average days of absence per affected employee due to DSE-related issues",
   presenteeism_hours: "Hours per week of reduced productivity due to DSE discomfort",
   discomfort_rate: "Percentage of DSE users who experience musculoskeletal symptoms",
-  use_assessor_costs: "Include costs for professional DSE assessors in the calculation",
+  use_assessor_costs: "Include savings from reduced need for professional DSE assessors",
   referral_rate: "Percentage of users referred to professional DSE assessors",
   assessor_type: "Whether assessors are internal staff or external consultants",
   assessor_cost: "Cost per assessment session or hourly rate for external consultants",
   assessor_time_hrs: "Time spent per internal assessment (hours)",
-  currency: "Select your preferred currency for all calculations"
+  currency: "Select your preferred currency for all calculations. Note: This is symbolic only - no actual exchange rate conversion is applied."
 };
 
 export const SOURCES = {

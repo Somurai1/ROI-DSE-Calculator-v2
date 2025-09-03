@@ -2,7 +2,7 @@ import React from 'react';
 import { CALCULATOR_CONFIG } from '../config/calculatorConfig.js';
 import InputField from './InputField.jsx';
 
-const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSectorDefault }) => {
+const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSectorDefault, fieldErrors = {} }) => {
   const sectors = Object.keys(CALCULATOR_CONFIG.sector_defaults);
   const currencies = CALCULATOR_CONFIG.currencies;
   const assessorTypes = CALCULATOR_CONFIG.assessor_types;
@@ -34,6 +34,7 @@ const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSector
               min={1}
               placeholder="e.g., 100"
               isDefault={false}
+              error={fieldErrors.users}
             />
 
             <InputField
@@ -70,6 +71,7 @@ const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSector
               step={1000}
               placeholder="e.g., 50000"
               isDefault={isSectorDefault('salary_employee')}
+              error={fieldErrors.salary_employee}
             />
 
             <InputField
@@ -82,6 +84,7 @@ const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSector
               step={1000}
               placeholder="e.g., 40000"
               isDefault={isSectorDefault('salary_admin')}
+              error={fieldErrors.salary_admin}
             />
           </div>
         </div>
@@ -142,6 +145,7 @@ const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSector
               step={0.1}
               placeholder="e.g., 10"
               isDefault={isSectorDefault('discomfort_rate')}
+              error={fieldErrors.discomfort_rate}
             />
 
             <InputField
@@ -154,6 +158,7 @@ const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSector
               step={0.1}
               placeholder="e.g., 2.5"
               isDefault={isSectorDefault('absence_days')}
+              error={fieldErrors.absence_days}
             />
 
             <InputField
@@ -166,16 +171,17 @@ const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSector
               step={0.1}
               placeholder="e.g., 1.0"
               isDefault={isSectorDefault('presenteeism_hours')}
+              error={fieldErrors.presenteeism_hours}
             />
           </div>
         </div>
 
-        {/* Assessor Costs */}
+        {/* Assessor Cost Savings */}
         <div className="border-b border-gray-200 pb-4">
-          <h3 className="text-lg font-medium text-gray-900 mb-4">Assessor Costs</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Assessor Cost Savings</h3>
           <div className="space-y-4">
             <InputField
-              label="Include Assessor Costs?"
+              label="Include Assessor Cost Savings?"
               fieldKey="use_assessor_costs"
               value={inputs.use_assessor_costs}
               onChange={onInputChange}

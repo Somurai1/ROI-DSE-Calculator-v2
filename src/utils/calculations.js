@@ -42,14 +42,16 @@ export class ROICalculator {
     } = this.inputs;
 
     // Validate inputs
-    if (!users || users <= 0) {
-      return this.getEmptyResult();
+    const validationErrors = this.validateInputs();
+    if (validationErrors.length > 0) {
+      return this.getEmptyResult(validationErrors);
     }
 
     // Get working constants
     const working_hours = this.config.defaults.working_hours;
     const working_days = this.config.defaults.working_days;
     const absence_reduction_pct = this.config.defaults.absence_reduction_pct;
+    const assessment_reduction_pct = this.config.defaults.assessment_reduction_pct;
     const software_minutes = this.config.defaults.software_minutes_per_user;
 
     // Calculate hourly costs
@@ -69,15 +71,21 @@ export class ROICalculator {
     const presenteeism_hrs_saved = affected * presenteeism_hours * this.config.defaults.working_weeks * absence_reduction_pct;
     const presenteeism_saving = presenteeism_hrs_saved * hourly_employee_cost;
 
-    // Calculate assessor costs
-    let assessor_cost_total = 0;
+    // Calculate assessor cost savings
+    let assessor_cost_saving = 0;
     if (use_assessor_costs) {
       const referred = users * referral_rate;
+      let cost_per_assessment;
       if (assessor_type === "internal") {
-        assessor_cost_total = referred * assessor_time_hrs * hourly_admin_cost;
+        cost_per_assessment = assessor_time_hrs * hourly_admin_cost;
       } else {
-        assessor_cost_total = referred * assessor_cost;
+        cost_per_assessment = assessor_cost;
       }
+      
+      // Calculate savings: before (full cost) - after (reduced cost)
+      const before_assessor_cost = referred * cost_per_assessment;
+      const after_assessor_cost = referred * cost_per_assessment * (1 - assessment_reduction_pct);
+      assessor_cost_saving = before_assessor_cost - after_assessor_cost;
     }
 
     // Calculate license costs
@@ -85,8 +93,8 @@ export class ROICalculator {
     const license_cost = users * price_per_user;
 
     // Calculate total savings and ROI
-    const total_saving = admin_saving + absence_saving + presenteeism_saving;
-    const net_benefit = total_saving - license_cost - assessor_cost_total;
+    const total_saving = admin_saving + absence_saving + presenteeism_saving + assessor_cost_saving;
+    const net_benefit = total_saving - license_cost;
     const roi_pct = license_cost > 0 ? (net_benefit / license_cost) * 100 : 0;
     const payback_months = total_saving > 0 ? license_cost / (total_saving / 12) : 0;
 
@@ -102,18 +110,18 @@ export class ROICalculator {
       admin_saving: this.roundTo2Decimals(admin_saving),
       absence_saving: this.roundTo2Decimals(absence_saving),
       presenteeism_saving: this.roundTo2Decimals(presenteeism_saving),
-      assessor_cost_total: this.roundTo2Decimals(assessor_cost_total),
+      assessor_cost_saving: this.roundTo2Decimals(assessor_cost_saving),
       
       // Before/After metrics
       before: {
         admin_hours: this.roundTo2Decimals(manual_admin_hours),
         absence_days: this.roundTo2Decimals(affected * absence_days),
-        assessor_cost: this.roundTo2Decimals(assessor_cost_total)
+        assessor_cost: this.roundTo2Decimals(use_assessor_costs ? (users * referral_rate * (assessor_type === "internal" ? assessor_time_hrs * hourly_admin_cost : assessor_cost)) : 0)
       },
       after: {
         admin_hours: this.roundTo2Decimals(habitus_admin_hours),
         absence_days: this.roundTo2Decimals(affected * absence_days * (1 - absence_reduction_pct)),
-        assessor_cost: this.roundTo2Decimals(assessor_cost_total)
+        assessor_cost: this.roundTo2Decimals(use_assessor_costs ? (users * referral_rate * (assessor_type === "internal" ? assessor_time_hrs * hourly_admin_cost : assessor_cost) * (1 - assessment_reduction_pct)) : 0)
       },
       
       // Pricing info
@@ -125,8 +133,99 @@ export class ROICalculator {
     };
   }
 
+  // Validate all inputs
+  validateInputs() {
+    const errors = [];
+    const {
+      users,
+      salary_employee,
+      salary_admin,
+      time_admin_manual_mins,
+      assessments_per_user,
+      absence_days,
+      presenteeism_hours,
+      discomfort_rate,
+      referral_rate,
+      assessor_cost,
+      assessor_time_hrs
+    } = this.inputs;
+
+    // Users validation
+    if (!users || users <= 0) {
+      errors.push('Please enter a valid number of users (must be greater than 0)');
+    } else if (users > 1000000) {
+      errors.push('Number of users cannot exceed 1,000,000');
+    }
+
+    // Salary validation
+    if (salary_employee < 0) {
+      errors.push('Employee salary cannot be negative');
+    } else if (salary_employee > 1000000) {
+      errors.push('Employee salary seems unusually high (over €1,000,000)');
+    }
+
+    if (salary_admin < 0) {
+      errors.push('Admin salary cannot be negative');
+    } else if (salary_admin > 1000000) {
+      errors.push('Admin salary seems unusually high (over €1,000,000)');
+    }
+
+    // Time validation
+    if (time_admin_manual_mins < 0) {
+      errors.push('Admin time cannot be negative');
+    } else if (time_admin_manual_mins > 1440) {
+      errors.push('Admin time cannot exceed 24 hours (1440 minutes)');
+    }
+
+    if (assessments_per_user < 0) {
+      errors.push('Assessments per user cannot be negative');
+    } else if (assessments_per_user > 10) {
+      errors.push('Assessments per user seems unusually high (over 10)');
+    }
+
+    if (absence_days < 0) {
+      errors.push('Absence days cannot be negative');
+    } else if (absence_days > 365) {
+      errors.push('Absence days cannot exceed 365 days per year');
+    }
+
+    if (presenteeism_hours < 0) {
+      errors.push('Presenteeism hours cannot be negative');
+    } else if (presenteeism_hours > 40) {
+      errors.push('Presenteeism hours cannot exceed 40 hours per week');
+    }
+
+    // Rate validation
+    if (discomfort_rate < 0) {
+      errors.push('Discomfort rate cannot be negative');
+    } else if (discomfort_rate > 1) {
+      errors.push('Discomfort rate cannot exceed 100%');
+    }
+
+    if (referral_rate < 0) {
+      errors.push('Referral rate cannot be negative');
+    } else if (referral_rate > 1) {
+      errors.push('Referral rate cannot exceed 100%');
+    }
+
+    // Assessor validation
+    if (assessor_cost < 0) {
+      errors.push('Assessor cost cannot be negative');
+    } else if (assessor_cost > 10000) {
+      errors.push('Assessor cost seems unusually high (over €10,000)');
+    }
+
+    if (assessor_time_hrs < 0) {
+      errors.push('Assessor time cannot be negative');
+    } else if (assessor_time_hrs > 24) {
+      errors.push('Assessor time cannot exceed 24 hours');
+    }
+
+    return errors;
+  }
+
   // Get empty result for invalid inputs
-  getEmptyResult() {
+  getEmptyResult(errors = ['Please enter valid inputs']) {
     return {
       license_cost: 0,
       total_saving: 0,
@@ -136,12 +235,12 @@ export class ROICalculator {
       admin_saving: 0,
       absence_saving: 0,
       presenteeism_saving: 0,
-      assessor_cost_total: 0,
+      assessor_cost_saving: 0,
       before: { admin_hours: 0, absence_days: 0, assessor_cost: 0 },
       after: { admin_hours: 0, absence_days: 0, assessor_cost: 0 },
       price_per_user: 0,
       isValid: false,
-      errors: ['Please enter a valid number of users']
+      errors: errors
     };
   }
 

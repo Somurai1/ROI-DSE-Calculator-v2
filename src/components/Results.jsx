@@ -10,6 +10,21 @@ const Results = ({ results, inputs, mode, onExportPDF }) => {
           <div className="text-gray-400 text-6xl mb-4">📊</div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">Enter your inputs to see ROI results</h3>
           <p className="text-gray-500">Fill in the form on the left to calculate your return on investment</p>
+          
+          {/* Show validation errors if any */}
+          {results.errors && results.errors.length > 0 && (
+            <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <h4 className="text-sm font-medium text-red-800 mb-2">Please fix the following issues:</h4>
+              <ul className="text-sm text-red-700 space-y-1">
+                {results.errors.map((error, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-red-500 mr-2">•</span>
+                    <span>{error}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -68,13 +83,23 @@ const Results = ({ results, inputs, mode, onExportPDF }) => {
           </div>
           
           <div className="text-center">
-            <div className="text-2xl font-bold text-success-600">
+            <div className="text-2xl font-bold text-success-600 relative group">
               {mode === 'quick' ? 
                 Math.min(results.roi_pct, 500).toFixed(1) + '%' : 
                 results.roi_pct.toFixed(1) + '%'
               }
+              {mode === 'quick' && results.roi_pct > 500 && (
+                <div className="absolute left-0 top-full mt-2 bg-blue-900 text-white text-xs rounded-lg p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-64 shadow-lg">
+                  <p><strong>ROI Cap Applied:</strong> Quick Mode limits ROI display to 500% for realistic expectations. Your actual ROI is {results.roi_pct.toFixed(1)}%.</p>
+                </div>
+              )}
             </div>
-            <div className="text-sm text-gray-500">ROI</div>
+            <div className="text-sm text-gray-500">
+              ROI
+              {mode === 'quick' && results.roi_pct > 500 && (
+                <span className="ml-1 text-blue-600" title="ROI capped at 500% in Quick Mode">ℹ️</span>
+              )}
+            </div>
           </div>
           
           <div className="text-center">
@@ -122,10 +147,10 @@ const Results = ({ results, inputs, mode, onExportPDF }) => {
                     <span className="text-sm text-gray-600">Presenteeism Reduction</span>
                     <span className="font-medium">{currencySymbol}{results.presenteeism_saving.toLocaleString()}</span>
                   </div>
-                  {results.assessor_cost_total > 0 && (
+                  {results.assessor_cost_saving > 0 && (
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600">Assessor Costs</span>
-                      <span className="font-medium text-red-600">-{currencySymbol}{results.assessor_cost_total.toLocaleString()}</span>
+                      <span className="text-sm text-gray-600">Assessor Cost Savings</span>
+                      <span className="font-medium text-green-600">{currencySymbol}{results.assessor_cost_saving.toLocaleString()}</span>
                     </div>
                   )}
                 </div>
