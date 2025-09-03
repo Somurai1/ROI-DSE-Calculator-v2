@@ -2,7 +2,6 @@
   "name": "habitus-roi-calculator",
   "version": "2.0.0",
   "description": "Dual-mode DSE ROI Calculator for Habitus Health",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
