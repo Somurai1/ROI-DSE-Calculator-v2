@@ -12,7 +12,7 @@ const Results = ({ results, inputs, mode, onExportPDF }) => {
           <p className="text-gray-500">Fill in the form on the left to calculate your return on investment</p>
           
           {/* Show validation errors if any */}
-          {results.errors && results.errors.length > 0 && (
+          {results && results.errors && results.errors.length > 0 && (
             <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
               <h4 className="text-sm font-medium text-red-800 mb-2">Please fix the following issues:</h4>
               <ul className="text-sm text-red-700 space-y-1">
