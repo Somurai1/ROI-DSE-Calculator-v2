@@ -32,7 +32,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 50,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 15
+      time_admin_manual_mins: 15,
+      use_assessor_costs: true
     },
     "Healthcare": {
       salary_employee: 55000,
@@ -44,7 +45,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 80,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 25
+      time_admin_manual_mins: 25,
+      use_assessor_costs: true
     },
     "Education": {
       salary_employee: 42000,
@@ -56,7 +58,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 40,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 20
+      time_admin_manual_mins: 20,
+      use_assessor_costs: true
     },
     "Manufacturing": {
       salary_employee: 48000,
@@ -68,7 +71,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 60,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 30
+      time_admin_manual_mins: 30,
+      use_assessor_costs: true
     },
     "Financial Services": {
       salary_employee: 75000,
@@ -80,7 +84,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 70,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 18
+      time_admin_manual_mins: 18,
+      use_assessor_costs: true
     },
     "Retail": {
       salary_employee: 32000,
@@ -92,7 +97,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 45,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 35
+      time_admin_manual_mins: 35,
+      use_assessor_costs: true
     },
     "Public Sector": {
       salary_employee: 45000,
@@ -104,7 +110,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 45,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 22
+      time_admin_manual_mins: 22,
+      use_assessor_costs: true
     },
     "Other": {
       salary_employee: 50000,
@@ -116,7 +123,8 @@ export const CALCULATOR_CONFIG = {
       assessor_cost: 50,
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
-      time_admin_manual_mins: 20
+      time_admin_manual_mins: 20,
+      use_assessor_costs: true
     }
   },
   
