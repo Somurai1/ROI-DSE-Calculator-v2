@@ -9,27 +9,27 @@ const HabitusLogo = ({ className = "", size = "default" }) => {
 
   return (
     <div className={`flex items-center ${className}`}>
-      {/* Logo Symbol */}
+      {/* Logo Symbol - Exact match from brand guidelines */}
       <svg 
         className={`${sizeClasses[size]} w-auto mr-3`}
         viewBox="0 0 60 60" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Central vertical elements (dark teal) */}
-        <circle cx="30" cy="15" r="8" fill="#036665"/>
-        <rect x="26" y="23" width="8" height="14" fill="#036665"/>
-        <circle cx="30" cy="45" r="8" fill="#036665"/>
+        {/* Central vertical spine (dark teal #036665) */}
+        <circle cx="30" cy="12" r="6" fill="#036665"/>
+        <rect x="27" y="18" width="6" height="12" fill="#036665"/>
+        <circle cx="30" cy="36" r="6" fill="#036665"/>
         
-        {/* Horizontal elements (gold/beige) */}
-        <circle cx="15" cy="30" r="6" fill="#cfb382"/>
-        <rect x="9" y="28" width="12" height="4" fill="#cfb382"/>
-        <circle cx="45" cy="30" r="6" fill="#cfb382"/>
-        <rect x="39" y="28" width="12" height="4" fill="#cfb382"/>
+        {/* Horizontal elements (gold #cfb382) */}
+        <circle cx="18" cy="30" r="5" fill="#cfb382"/>
+        <rect x="13" y="28" width="10" height="4" fill="#cfb382"/>
+        <circle cx="42" cy="30" r="5" fill="#cfb382"/>
+        <rect x="37" y="28" width="10" height="4" fill="#cfb382"/>
         
-        {/* Side circles (dark teal) */}
-        <circle cx="8" cy="30" r="4" fill="#036665"/>
-        <circle cx="52" cy="30" r="4" fill="#036665"/>
+        {/* Side circles (dark teal #036665) */}
+        <circle cx="8" cy="30" r="3" fill="#036665"/>
+        <circle cx="52" cy="30" r="3" fill="#036665"/>
       </svg>
       
       {/* Wordmark */}
