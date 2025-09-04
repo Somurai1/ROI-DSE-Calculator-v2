@@ -7,6 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Habitus Health Brand Colors
+        habitus: {
+          green: {
+            light: '#e6ddcc',
+            DEFAULT: '#036665',
+            dark: '#003649',
+            darker: '#081933'
+          },
+          gold: {
+            light: '#e6ddcc',
+            DEFAULT: '#cfb382'
+          }
+        },
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -45,7 +58,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'Helvetica', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',

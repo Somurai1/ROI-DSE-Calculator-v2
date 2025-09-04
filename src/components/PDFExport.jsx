@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 30,
-    borderBottom: '2px solid #0ea5e9',
+    borderBottom: '2px solid #036665',
     paddingBottom: 20
   },
   logo: {
     width: 60,
     height: 60,
-    backgroundColor: '#0ea5e9',
+    backgroundColor: '#036665',
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center'
@@ -248,10 +248,14 @@ const PDFExport = ({ results, inputs, mode, onClose }) => {
             <Text style={styles.logoText}>H</Text>
           </View>
           <View style={styles.headerInfo}>
-            <Text style={{ fontSize: 12, color: '#6b7280' }}>Client: {clientName}</Text>
-            <Text style={{ fontSize: 12, color: '#6b7280' }}>Company: {companyName}</Text>
-            <Text style={{ fontSize: 12, color: '#6b7280' }}>Date: {new Date().toLocaleDateString()}</Text>
-            <Text style={{ fontSize: 12, color: '#6b7280' }}>Report ID: {Date.now().toString().slice(-6)}</Text>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#036665', marginBottom: 4 }}>
+              Habitus Health
+            </Text>
+            <Text style={{ fontSize: 12, color: '#6b7280' }}>DSE ROI Calculator Report</Text>
+            <Text style={{ fontSize: 10, color: '#6b7280', marginTop: 8 }}>Client: {clientName}</Text>
+            <Text style={{ fontSize: 10, color: '#6b7280' }}>Company: {companyName}</Text>
+            <Text style={{ fontSize: 10, color: '#6b7280' }}>Date: {new Date().toLocaleDateString()}</Text>
+            <Text style={{ fontSize: 10, color: '#6b7280' }}>Report ID: {Date.now().toString().slice(-6)}</Text>
           </View>
         </View>
 

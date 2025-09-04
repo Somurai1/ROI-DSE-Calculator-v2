@@ -8,8 +8,8 @@ const ModeToggle = ({ mode, onModeChange }) => {
           onClick={() => onModeChange('quick')}
           className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
             mode === 'quick'
-              ? 'bg-primary-100 text-primary-700 shadow-sm'
-              : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              ? 'bg-habitus-green shadow-sm text-white'
+              : 'text-gray-500 hover:text-habitus-green hover:bg-habitus-green-light'
           }`}
         >
           <div className="flex items-center justify-center space-x-2">
@@ -23,8 +23,8 @@ const ModeToggle = ({ mode, onModeChange }) => {
           onClick={() => onModeChange('advanced')}
           className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200 ${
             mode === 'advanced'
-              ? 'bg-primary-100 text-primary-700 shadow-sm'
-              : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              ? 'bg-habitus-green shadow-sm text-white'
+              : 'text-gray-500 hover:text-habitus-green hover:bg-habitus-green-light'
           }`}
         >
           <div className="flex items-center justify-center space-x-2">
