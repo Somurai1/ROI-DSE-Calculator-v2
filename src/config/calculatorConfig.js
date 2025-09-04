@@ -33,6 +33,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 15,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     },
     "Healthcare": {
@@ -46,6 +47,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 25,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     },
     "Education": {
@@ -59,6 +61,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 20,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     },
     "Manufacturing": {
@@ -72,6 +75,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 30,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     },
     "Financial Services": {
@@ -85,6 +89,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 18,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     },
     "Retail": {
@@ -98,6 +103,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 35,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     },
     "Public Sector": {
@@ -111,6 +117,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 22,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     },
     "Other": {
@@ -124,6 +131,7 @@ export const CALCULATOR_CONFIG = {
       assessor_time_hrs: 1.0,
       assessments_per_user: 1.0,
       time_admin_manual_mins: 20,
+      time_admin_habitus_mins: 8,
       use_assessor_costs: true
     }
   },

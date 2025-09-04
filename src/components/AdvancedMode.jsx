@@ -108,12 +108,14 @@ const AdvancedMode = ({ inputs, onInputChange, onSectorChange, onReset, isSector
             <InputField
               label="Admin Time per User (Habitus) - Minutes"
               fieldKey="time_admin_habitus_mins"
-              value={8}
-              onChange={() => {}} // Fixed value
+              value={inputs.time_admin_habitus_mins}
+              onChange={onInputChange}
               type="number"
-              disabled={true}
-              showTooltip={false}
-              isDefault={false}
+              min={1}
+              max={60}
+              step={1}
+              placeholder="e.g., 8"
+              isDefault={isSectorDefault('time_admin_habitus_mins')}
             />
 
             <InputField

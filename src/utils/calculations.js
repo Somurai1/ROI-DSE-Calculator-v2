@@ -52,7 +52,7 @@ export class ROICalculator {
     const working_days = this.config.defaults.working_days;
     const absence_reduction_pct = this.config.defaults.absence_reduction_pct;
     const assessment_reduction_pct = this.config.defaults.assessment_reduction_pct;
-    const software_minutes = this.config.defaults.software_minutes_per_user;
+    const software_minutes = inputs.time_admin_habitus_mins || this.config.defaults.software_minutes_per_user;
 
     // Calculate hourly costs
     const hourly_admin_cost = salary_admin / working_hours;

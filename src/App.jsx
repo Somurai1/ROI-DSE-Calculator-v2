@@ -17,6 +17,7 @@ function App() {
     salary_employee: 50000,
     salary_admin: 40000,
     time_admin_manual_mins: 20,
+    time_admin_habitus_mins: 8,
     assessments_per_user: 1.0,
     absence_days: 2.5,
     presenteeism_hours: 1.0,
