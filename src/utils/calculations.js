@@ -141,6 +141,7 @@ export class ROICalculator {
       salary_employee,
       salary_admin,
       time_admin_manual_mins,
+      time_admin_habitus_mins,
       assessments_per_user,
       absence_days,
       presenteeism_hours,
@@ -175,6 +176,12 @@ export class ROICalculator {
       errors.push('Admin time cannot be negative');
     } else if (time_admin_manual_mins > 1440) {
       errors.push('Admin time cannot exceed 24 hours (1440 minutes)');
+    }
+
+    if (time_admin_habitus_mins < 0) {
+      errors.push('Habitus admin time cannot be negative');
+    } else if (time_admin_habitus_mins > 1440) {
+      errors.push('Habitus admin time cannot exceed 24 hours (1440 minutes)');
     }
 
     if (assessments_per_user < 0) {
