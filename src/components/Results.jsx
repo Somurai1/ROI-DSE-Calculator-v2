@@ -3,7 +3,19 @@ import { ROICalculator } from '../utils/calculations.js';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const Results = ({ results, inputs, mode, onExportPDF }) => {
-  if (!results || !results.isValid) {
+  if (!results) {
+    return (
+      <div className="card">
+        <div className="text-center py-12">
+          <div className="text-gray-400 text-6xl mb-4">📊</div>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">Enter your inputs to see ROI results</h3>
+          <p className="text-gray-500">Fill in the form on the left to calculate your return on investment</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!results.isValid) {
     return (
       <div className="card">
         <div className="text-center py-12">
@@ -12,7 +24,7 @@ const Results = ({ results, inputs, mode, onExportPDF }) => {
           <p className="text-gray-500">Fill in the form on the left to calculate your return on investment</p>
           
           {/* Show validation errors if any */}
-          {results && results.errors && results.errors.length > 0 && (
+          {results && results.errors && Array.isArray(results.errors) && results.errors.length > 0 && (
             <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg">
               <h4 className="text-sm font-medium text-red-800 mb-2">Please fix the following issues:</h4>
               <ul className="text-sm text-red-700 space-y-1">
